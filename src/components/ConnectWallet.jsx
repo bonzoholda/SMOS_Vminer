@@ -42,7 +42,7 @@ function ConnectWallet({ setProvider, setSigner, setAddress }) {
     };
 
     return (
-        <div style={{ padding: '10px', border: '1px solid #ccc', marginBottom: '20px' }}>
+        <div className="glass-panel" style={{ marginBottom: '20px' }}>
             <h3>Wallet Connection</h3>
             <button onClick={connect} disabled={connected}>
                 {status}
