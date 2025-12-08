@@ -19,6 +19,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* Use a subtle, colorful gradient */
+  background: linear-gradient(135deg, #1f1f47 0%, #3e1b4f 50%, #1f1f47 100%);
 }
 
 #root {
@@ -27,6 +29,32 @@ body {
   padding: 2rem;
   text-align: center;
 }
+
+/* --- GLASSMORHISM EFFECT --- */
+.glass-panel {
+  /* 1. Semi-transparent Background: White at 15% opacity */
+  background: rgba(255, 255, 255, 0.15);
+  
+  /* 2. The Blur Effect: This is crucial */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* For Safari support */
+  
+  /* 3. Subtle Border: Semi-transparent white to simulate light reflection */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  /* 4. Soft Shadow: Gives the illusion of floating */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  
+  /* Standard modern features */
+  border-radius: 16px;
+  padding: 20px;
+}
+
+/* Ensure text is readable */
+.glass-panel h3 {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
 
 button {
   border-radius: 8px;
