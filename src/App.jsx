@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ConnectWallet from './components/ConnectWallet';
 import DepositForm from './components/DepositForm';
-import './App.css'; // Assuming you have App.css for basic styling
+import './index.css'; // Assuming you have App.css for basic styling
 
 function App() {
     const [signer, setSigner] = useState(null);
