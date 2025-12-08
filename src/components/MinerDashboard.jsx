@@ -77,7 +77,7 @@ function MinerDashboard({ provider, userAddress }) {
     }, [userAddress, lastUpdated]); // Rerun when user changes or we force update
 
     return (
-        <div style={{ padding: '20px', border: '2px solid #646cff', borderRadius: '10px', marginTop: '30px' }}>
+        <div className="glass-panel" style={{ marginTop: '30px' }}>
             <h3>Miner Dashboard Stats</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', textAlign: 'left' }}>
                 <p><strong>SMOS Balance:</strong> {stats.smosBalance} SMOS</p>
