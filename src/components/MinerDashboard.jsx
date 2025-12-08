@@ -12,7 +12,7 @@ const formatBigInt = (value, decimals = 18, fixed = 4) => {
     return ethers.formatUnits(value, decimals).slice(0, fixed + 1);
 };
 
-function MinerDashboard({ provider, userAddress }) {
+function MinerDashboard({ provider, signer, userAddress, setLastUpdated }) {
     const [stats, setStats] = useState({
         shares: '0',
         rewards: '0',
@@ -76,6 +76,31 @@ function MinerDashboard({ provider, userAddress }) {
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, [userAddress, lastUpdated]); // Rerun when user changes or we force update
 
+    const handleClaim = async () => {
+            if (!signer) {
+                alert("Wallet not connected or signer missing.");
+                return;
+            }
+    
+            try {
+                const contract = getContract(SMOS_CONTRACT_ADDRESS, SMOS_ABI, signer);
+                
+                // Execute the claim transaction
+                const claimTx = await contract.claimPulseRewards();
+                alert("Claim initiated. Confirm in MetaMask.");
+                
+                await claimTx.wait();
+                alert("✅ Rewards successfully claimed!");
+                
+                // Force a dashboard refresh
+                setLastUpdated(Date.now()); 
+                
+            } catch (error) {
+                console.error("Claim failed:", error);
+                alert(`❌ Claim failed: ${error.reason || 'Check console for details.'}`);
+            }
+        };
+    
     return (
         <div className="glass-panel" style={{ marginTop: '30px' }}>
             <h3>Miner Dashboard Stats</h3>
@@ -85,10 +110,16 @@ function MinerDashboard({ provider, userAddress }) {
                 <p><strong>Pending Reward:</strong> {stats.rewards} SMOS</p>
                 <p><strong>Lock Status:</strong> {stats.lockTime}</p>
             </div>
-            {/* Optional: Add a button to manually refresh data */}
-            <button onClick={() => setLastUpdated(Date.now())} style={{ marginTop: '10px' }}>
-                Refresh Data
-            </button>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center' }}>
+                <button onClick={() => setLastUpdated(Date.now())}>
+                    Refresh Data
+                </button>
+                        
+                {/* NEW CLAIM BUTTON */}
+                <button onClick={handleClaim} style={{ backgroundColor: '#4CAF50' }}>
+                    Claim {stats.rewards} SMOS
+                </button>
+            </div>
         </div>
     );
 }
