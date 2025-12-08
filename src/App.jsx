@@ -8,6 +8,7 @@ function App() {
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [userAddress, setUserAddress] = useState(null);
+    const [lastUpdated, setLastUpdated] = useState(Date.now());
 
     return (
         <div className="App" style={{ maxWidth: '600px', margin: '50px auto', fontFamily: 'Arial' }}>
@@ -23,11 +24,15 @@ function App() {
                 <>
                     <DepositForm 
                         signer={signer} 
-                        userAddress={userAddress} 
+                        userAddress={userAddress}
+                        setLastUpdated={setLastUpdated}
                     />
                     <MinerDashboard // <--- NEW COMPONENT
                         provider={provider} 
+                        signer={signer} // Pass signer for transactions
                         userAddress={userAddress} 
+                        setLastUpdated={setLastUpdated} // Pass setter to refresh after claim/deposit
+                        lastUpdated={lastUpdated} // Pass state to trigger useEffect
                     />
                 </>    
             )}
