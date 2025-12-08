@@ -49,7 +49,7 @@ function DepositForm({ signer, userAddress }) {
     };
 
     return (
-        <div style={{ padding: '10px', border: '1px solid green' }}>
+        <div className="glass-panel" style={{ marginBottom: '20px' }}>
             <h3>Deposit USDT & Stake</h3>
             <p>User Address: {userAddress ? userAddress : 'N/A'}</p>
             <input
