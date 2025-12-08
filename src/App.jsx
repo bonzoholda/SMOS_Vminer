@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ConnectWallet from './components/ConnectWallet';
 import DepositForm from './components/DepositForm';
+import MinerDashboard from './components/MinerDashboard';
 import './index.css'; // Assuming you have App.css for basic styling
 
 function App() {
