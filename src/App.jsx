@@ -5,6 +5,7 @@ import MinerDashboard from './components/MinerDashboard';
 import './index.css'; // Assuming you have App.css for basic styling
 
 function App() {
+    const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [userAddress, setUserAddress] = useState(null);
 
@@ -12,16 +13,23 @@ function App() {
         <div className="App" style={{ maxWidth: '600px', margin: '50px auto', fontFamily: 'Arial' }}>
             <h1>Hybrid Pulse Miner Staking Interface</h1>
             
-            <ConnectWallet 
+            <ConnectWallet
+                setProvider={setProvider}
                 setSigner={setSigner} 
                 setAddress={setUserAddress} 
             />
             
             {signer && (
-                <DepositForm 
-                    signer={signer} 
-                    userAddress={userAddress} 
-                />
+                <>
+                    <DepositForm 
+                        signer={signer} 
+                        userAddress={userAddress} 
+                    />
+                    <MinerDashboard // <--- NEW COMPONENT
+                        provider={provider} 
+                        userAddress={userAddress} 
+                    />
+                </>    
             )}
             
             <p style={{ marginTop: '30px', fontSize: '12px' }}>
