@@ -12,7 +12,7 @@ const formatBigInt = (value, decimals = 18, fixed = 4) => {
     return ethers.formatUnits(value, decimals).slice(0, fixed + 1);
 };
 
-function MinerDashboard({ provider, signer, userAddress, setLastUpdated }) {
+function MinerDashboard({ provider, signer, userAddress, lastUpdated, setLastUpdated }) {
     const [stats, setStats] = useState({
         shares: '0',
         rewards: '0',
@@ -21,7 +21,7 @@ function MinerDashboard({ provider, signer, userAddress, setLastUpdated }) {
     });
     
     // State to force data refresh after a deposit or claim
-    const [lastUpdated, setLastUpdated] = useState(Date.now());
+    //const [lastUpdated, setLastUpdated] = useState(Date.now());
 
     // Helper to format Unix timestamp to readable date/time
     const formatLockTime = (timestamp) => {
