@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
 
-function ConnectWallet({ setSigner, setAddress }) {
+function ConnectWallet({ setProvider, setSigner, setAddress }) {
     const [connected, setConnected] = useState(false);
     const [status, setStatus] = useState('Connect Wallet');
     
@@ -28,6 +28,7 @@ function ConnectWallet({ setSigner, setAddress }) {
                 setStatus('Please connect to BSC Testnet (ID 97)');
                 // Optionally add code here to prompt switching networks
             } else {
+                setProvider(provider);
                 setSigner(signer);
                 setAddress(accounts);
                 setConnected(true);
