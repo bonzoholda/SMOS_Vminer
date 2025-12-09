@@ -1,11 +1,7 @@
-/* 1. Reliable Exo 2 Loading (Better than @import) */
-@font-face {
-  font-family: 'Exo 2';
-  font-style: normal;
-  font-weight: 300 700;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/exo2/v20/4UaErENHsxJlGDu5kaYx.woff2') format('woff2');
-}
+/* -------------------------------------------------------
+   1. EXO 2 FONT (Reliable Load, No Conflicts)
+------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap');
 
 :root {
   --font-primary: 'Exo 2', sans-serif;
@@ -17,80 +13,87 @@
   --color-accent: #0a84ff;
 }
 
-/* Ensure EVERYTHING uses Exo 2 */
-*,
-*::before,
-*::after {
-  font-family: var(--font-primary) !important;
-}
-
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
+/* -------------------------------------------------------
+   2. GLOBAL RESET (SAFE VERSION)
+------------------------------------------------------- */
 * {
-  max-width: 100%;
   box-sizing: border-box;
 }
 
-
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-primary);
+}
+
+/* -------------------------------------------------------
+   3. BODY BACKGROUND + BASE LAYOUT
+------------------------------------------------------- */
+body {
   min-width: 320px;
   min-height: 100vh;
-  display: flex;
-  place-items: center;
-
+  display: block; /* IMPORTANT — fixes freezing & overflow */
   background: linear-gradient(135deg, #1f1f47 0%, #3e1b4f 50%, #1f1f47 100%);
   color: var(--color-text-primary);
   line-height: 1.4;
 }
 
+/* -------------------------------------------------------
+   4. ROOT CONTAINER
+------------------------------------------------------- */
 #root {
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
 }
 
-/* APP CONTAINER */
+/* -------------------------------------------------------
+   5. APP CONTAINER
+------------------------------------------------------- */
 .App {
   width: 100%;
   max-width: 600px;
   margin: 30px auto;
-  padding: 0 12px;
-  overflow-x: hidden;
+  padding: 0 15px;
 }
 
-
-/* GLASS PANEL */
+/* -------------------------------------------------------
+   6. GLASS PANELS (SAFE, NON-BREAKING VERSION)
+------------------------------------------------------- */
 .glass-panel {
   background: var(--color-card-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+
   border: 1px solid var(--color-border);
   border-radius: 12px;
+
   padding: 20px;
   margin-bottom: 20px;
+
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+
   width: 100%;
+}
+
+/* Do NOT override all inner divs — this caused breakage */
+
+/* Allow normal layout inside */
+.glass-panel div {
   max-width: 100%;
   overflow-x: hidden;
 }
 
-/* Any grid inside becomes single column automatically */
-.glass-panel div {
-  width: 100%;
-  max-width: 100%;
-}
-
-
-/* TYPOGRAPHY */
+/* -------------------------------------------------------
+   7. TYPOGRAPHY
+------------------------------------------------------- */
 h1 {
   font-size: 28px;
   font-weight: 700;
-  text-align: center;
   margin-bottom: 30px;
 }
 
@@ -98,9 +101,8 @@ h3 {
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 15px 0;
-  color: var(--color-text-primary);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
   padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .glass-panel p,
@@ -111,26 +113,28 @@ h3 {
   color: var(--color-text-primary);
 }
 
-.glass-panel p strong {
-  font-weight: 600;
-}
-
-/* INPUTS */
+/* -------------------------------------------------------
+   8. INPUTS
+------------------------------------------------------- */
 input {
   width: 100%;
+  padding: 10px;
+
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.3);
   border-radius: 6px;
-  color: var(--color-text-primary);
+
   font-size: 16px;
-  padding: 10px;
-  box-sizing: border-box;
+  color: var(--color-text-primary);
 }
 
-/* BUTTON (clean, single definition) */
+/* -------------------------------------------------------
+   9. BUTTONS
+------------------------------------------------------- */
 button {
   font-family: var(--font-primary);
   font-weight: 600;
+
   padding: 0.6em 1.2em;
   font-size: 1em;
 
@@ -149,11 +153,13 @@ button:hover {
   transform: translateY(-1px);
 }
 
+/* -------------------------------------------------------
+   10. MOBILE RESPONSIVE FIXES (SAFE, CLEAN VERSION)
+------------------------------------------------------- */
 @media (max-width: 600px) {
 
-  body {
-    padding: 0;
-    margin: 0;
+  #root {
+    padding: 1.5rem 1rem;
   }
 
   .App {
@@ -163,34 +169,32 @@ button:hover {
 
   h1 {
     font-size: 24px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
-  /* Fix ANY grid used inside dashboard */
-  .glass-panel [class*="grid"],
-  .glass-panel div {
-    display: block !important;
-    width: 100% !important;
-  }
-
-  /* Inputs take full width */
-  .glass-panel input {
+  /* Ensure inputs/buttons fill width nicely */
+  input,
+  button {
     width: 100%;
-    max-width: 100%;
   }
 
-  /* Button full width on mobile */
-  .glass-panel button {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Force flex layouts to stack vertically */
+  /* Only collapse known flex rows (safe selectors) */
   .glass-panel .row,
   .glass-panel .flex,
-  .glass-panel > div:nth-child(3) {
-    flex-direction: column !important;
-    align-items: stretch !important;
+  .glass-panel .input-row,
+  .glass-panel .action-row {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
-}
+
+  /* Prevent any internal overflow */
+  .glass-panel {
+    padding: 16px;
+  }
+
+  .glass-panel div {
+    max-width: 100%;
+  }
+  }
+  
