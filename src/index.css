@@ -1,47 +1,50 @@
 /* -------------------------------------------------------
-   1. EXO 2 FONT (Reliable Load, No Conflicts)
+   1. GLOBAL EXO 2 FONT (Correct, Full Coverage)
 ------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap');
 
 :root {
   --font-primary: 'Exo 2', sans-serif;
 
   --color-text-primary: #f2f2f7;
-  --color-text-secondary: #8e8e93;
-  --color-card-bg: rgba(255, 255, 255, 0.15);
-  --color-border: rgba(255, 255, 255, 0.3);
+  --color-text-secondary: #a1a1a7;
+
+  --color-card-bg: rgba(255, 255, 255, 0.12);
+  --color-border: rgba(255, 255, 255, 0.25);
+
   --color-accent: #0a84ff;
+
+  /* Dark night theme */
+  --bg-start: #0a0a16;
+  --bg-mid:   #0d1b2a;
+  --bg-end:   #05050c;
 }
 
 /* -------------------------------------------------------
-   2. GLOBAL RESET (SAFE VERSION)
+   2. GLOBAL RESET AND BASE SETUP
 ------------------------------------------------------- */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-primary) !important; /* Full-force fix */
+  -webkit-font-smoothing: antialiased;
 }
 
 html, body {
-  margin: 0;
-  padding: 0;
   width: 100%;
+  height: 100%;
   overflow-x: hidden;
-  font-family: var(--font-primary);
 }
 
-/* -------------------------------------------------------
-   3. BODY BACKGROUND + BASE LAYOUT
-------------------------------------------------------- */
 body {
-  min-width: 320px;
-  min-height: 100vh;
-  display: block; /* IMPORTANT — fixes freezing & overflow */
-  background: linear-gradient(135deg, #1f1f47 0%, #3e1b4f 50%, #1f1f47 100%);
+  background: linear-gradient(145deg, var(--bg-start), var(--bg-mid), var(--bg-end));
   color: var(--color-text-primary);
   line-height: 1.4;
 }
 
 /* -------------------------------------------------------
-   4. ROOT CONTAINER
+   3. ROOT
 ------------------------------------------------------- */
 #root {
   width: 100%;
@@ -52,7 +55,7 @@ body {
 }
 
 /* -------------------------------------------------------
-   5. APP CONTAINER
+   4. APP CONTAINER
 ------------------------------------------------------- */
 .App {
   width: 100%;
@@ -62,74 +65,71 @@ body {
 }
 
 /* -------------------------------------------------------
-   6. GLASS PANELS (SAFE, NON-BREAKING VERSION)
+   5. GLASS PANELS
 ------------------------------------------------------- */
 .glass-panel {
   background: var(--color-card-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 14px;
 
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.28);
 
   width: 100%;
+  overflow: hidden;
 }
 
-/* Do NOT override all inner divs — this caused breakage */
-
-/* Allow normal layout inside */
-.glass-panel div {
+/* Prevent overflow items inside */
+.glass-panel * {
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 /* -------------------------------------------------------
-   7. TYPOGRAPHY
+   6. TYPOGRAPHY
 ------------------------------------------------------- */
 h1 {
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 h3 {
   font-size: 18px;
   font-weight: 600;
-  margin: 0 0 15px 0;
+  margin-bottom: 14px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-.glass-panel p,
-.glass-panel label,
-.glass-panel input {
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--color-text-primary);
+/* Wallet address wrap fix */
+.wrap-text {
+  word-wrap: break-word;
+  word-break: break-all; /* Important for address */
+  white-space: normal;
 }
 
 /* -------------------------------------------------------
-   8. INPUTS
+   7. INPUTS
 ------------------------------------------------------- */
 input {
   width: 100%;
-  padding: 10px;
-
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 6px;
+  padding: 10px 12px;
 
   font-size: 16px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 6px;
+
   color: var(--color-text-primary);
 }
 
 /* -------------------------------------------------------
-   9. BUTTONS
+   8. BUTTONS
 ------------------------------------------------------- */
 button {
   font-family: var(--font-primary);
@@ -138,23 +138,47 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
 
-  border: 1px solid transparent;
   border-radius: 8px;
+  border: 1px solid transparent;
 
   background-color: #007aff;
-  color: white;
+  color: #fff;
 
   cursor: pointer;
-  transition: background-color 0.25s, transform 0.1s;
+  transition: 0.2s ease;
 }
 
 button:hover {
   background-color: #005bb5;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
 }
 
 /* -------------------------------------------------------
-   10. MOBILE RESPONSIVE FIXES (SAFE, CLEAN VERSION)
+   9. STAKING SECTION FIX (Auto-Flex, Not Cropped)
+------------------------------------------------------- */
+.stake-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.stake-row p {
+  flex: 1;          /* Takes remaining space */
+  text-align: left; /* Avoid overlap */
+  white-space: normal;
+}
+
+.stake-row button {
+  flex-shrink: 0;   /* Button stays visible */
+}
+
+/* -------------------------------------------------------
+   10. MOBILE RESPONSIVE FIXES
 ------------------------------------------------------- */
 @media (max-width: 600px) {
 
@@ -168,33 +192,29 @@ button:hover {
   }
 
   h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 23px;
+    margin-bottom: 18px;
   }
 
-  /* Ensure inputs/buttons fill width nicely */
-  input,
-  button {
-    width: 100%;
-  }
-
-  /* Only collapse known flex rows (safe selectors) */
-  .glass-panel .row,
-  .glass-panel .flex,
-  .glass-panel .input-row,
-  .glass-panel .action-row {
-    display: flex;
+  /* Stack staking rows cleanly */
+  .stake-row {
     flex-direction: column;
+    align-items: stretch;
     gap: 10px;
   }
 
-  /* Prevent any internal overflow */
+  .stake-row button {
+    width: 100%;
+  }
+
+  /* Reduce padding on panels */
   .glass-panel {
     padding: 16px;
   }
 
-  .glass-panel div {
-    max-width: 100%;
+  input,
+  button {
+    width: 100%;
   }
-  }
-  
+   }
+   
