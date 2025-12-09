@@ -30,14 +30,14 @@ function DepositForm({ signer, userAddress }) {
             const approveTx = await usdtContract.approve(SMOS_CONTRACT_ADDRESS, amountInWei);
             await approveTx.wait();
             
-            alert('USDT Approved! Proceeding to deposit (2/2)...');
+            alert('USDT Approved! Proceeding to purchase Power Unit (2/2)...');
 
             // --- STEP 2: CALL DEPOSITUSDT ---
             const smosContract = getContract(SMOS_CONTRACT_ADDRESS, SMOS_ABI, signer);
             const depositTx = await smosContract.depositUSDT(amountInWei);
             await depositTx.wait();
             
-            alert(`✅ Deposit Successful! Transaction Hash: ${depositTx.hash}`);
+            alert(`✅ Purchase Successful! Transaction Hash: ${depositTx.hash}`);
             setAmount('');
 
         } catch (error) {
@@ -50,7 +50,7 @@ function DepositForm({ signer, userAddress }) {
 
     return (
         <div className="glass-panel" style={{ marginBottom: '20px' }}>
-            <h3>Deposit USDT & Stake</h3>
+            <h3>Purchase Power Unit with USDT</h3>
             <p>User Address: {userAddress ? userAddress : 'N/A'}</p>
             <input
                 type="number"
@@ -61,7 +61,7 @@ function DepositForm({ signer, userAddress }) {
                 style={{ marginRight: '10px', padding: '8px' }}
             />
             <button onClick={handleDeposit} disabled={loading || !signer}>
-                {loading ? 'Processing...' : 'Approve & Deposit'}
+                {loading ? 'Processing...' : 'Approve & Purchase'}
             </button>
             {loading && <p>Waiting for transaction confirmations...</p>}
         </div>
