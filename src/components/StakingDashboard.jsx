@@ -168,14 +168,14 @@ function StakingDashboard({ provider, signer, userAddress, lastUpdated, setLastU
                     style={{ padding: '8px', width: '200px' }}
                 />
                 <button onClick={handleStake} disabled={loading || !signer}>
-                    {loading ? 'Processing...' : 'STAKE SMOS'}
+                    {loading ? 'Processing...' : 'Stake SMOS'}
                 </button>
             </div>
 
             {/* Stats Display */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', textAlign: 'left', borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '15px' }}>
                 <p><strong>Total Staked:</strong> {stats.totalStaked} SMOS</p>
-                <p><strong>Pending Tax Rewards:</strong> {stats.pendingTax} USDT</p>
+                <p><strong>Pending Tax Rewards:</strong> {stats.pendingTax} SMOS</p>
                 <p style={{ gridColumn: 'span 2' }}>
                     <strong>Lock Status:</strong> <span style={{ color: stats.lockStatus.locked ? 'red' : 'lightgreen', fontWeight: 'bold' }}>{stats.lockStatus.status}</span>
                 </p>
@@ -188,7 +188,7 @@ function StakingDashboard({ provider, signer, userAddress, lastUpdated, setLastU
                     disabled={loading || !signer || stats.lockStatus.locked}
                     style={{ backgroundColor: stats.lockStatus.locked ? '#555' : '#FFC107' }}
                 >
-                    UNSTAKE SMOS
+                    Unstake SMOS
                 </button>
             </div>
         </div>
