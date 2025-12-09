@@ -1,27 +1,37 @@
-/* 1. Import Exo 2 from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap');
+/* 1. Reliable Exo 2 Loading (Better than @import) */
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/exo2/v20/4UaErENHsxJlGDu5kaYx.woff2') format('woff2');
+}
 
 :root {
-  /* Define the primary futuristic font */
   --font-primary: 'Exo 2', sans-serif;
-  
-  /* Define iOS-style colors for dark mode */
-  --color-text-primary: #f2f2f7; /* iOS Light Text */
-  --color-text-secondary: #8e8e93; /* iOS Secondary Text */
-  --color-card-bg: rgba(255, 255, 255, 0.15); /* Glassmorphism Base */
+
+  --color-text-primary: #f2f2f7;
+  --color-text-secondary: #8e8e93;
+  --color-card-bg: rgba(255, 255, 255, 0.15);
   --color-border: rgba(255, 255, 255, 0.3);
-  --color-accent: #0a84ff; /* iOS Blue */
+  --color-accent: #0a84ff;
+}
+
+/* Ensure EVERYTHING uses Exo 2 */
+*,
+*::before,
+*::after {
+  font-family: var(--font-primary) !important;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  /* Use a subtle, colorful gradient */
+  display: flex;
+  place-items: center;
+
   background: linear-gradient(135deg, #1f1f47 0%, #3e1b4f 50%, #1f1f47 100%);
-  font-family: var(--font-primary);
   color: var(--color-text-primary);
   line-height: 1.4;
 }
@@ -33,135 +43,107 @@ body {
   text-align: center;
 }
 
-/* --- APP CONTAINER & BASE FONT SIZE --- */
+/* APP CONTAINER */
 .App {
-    /* Use 'auto' margin for centering. Maximum width for comfortable reading. */
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 0 15px; /* Add horizontal padding for mobile view */
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 0 15px;
 }
 
-/* --- GLASS CARD REFINEMENT (iOS Style) --- */
+/* GLASS PANEL */
 .glass-panel {
-    /* Inherited Glassmorphism properties: backdrop-filter, etc. */
-    background: var(--color-card-bg);
-    backdrop-filter: blur(20px); /* Increased blur for stronger effect */
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--color-border);
-    border-radius: 12px; /* iOS standard corner radius */
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Softer, more subtle shadow */
+  background: var(--color-card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
-/* --- TYPOGRAPHY HIERARCHY (iOS Legibility) --- */
+/* TYPOGRAPHY */
 h1 {
-    font-size: 28px;
-    font-weight: 700; /* Bold for prominence */
-    color: var(--color-text-primary);
-    text-align: center;
-    margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 h3 {
-    font-size: 18px; /* Suitable for section headers */
-    font-weight: 600;
-    color: var(--color-text-primary);
-    margin-top: 0;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
-    padding-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 8px;
 }
 
-/* General text within cards */
 .glass-panel p,
 .glass-panel label,
 .glass-panel input {
-    font-size: 16px; /* Body text size for excellent readability on mobile */
-    font-weight: 400;
-    color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-primary);
 }
 
-/* Secondary data (labels, hints) */
 .glass-panel p strong {
-    font-weight: 600; /* Make data stand out */
+  font-weight: 600;
 }
 
-/* --- BUTTON & INPUT REFINEMENTS --- */
-button {
-    font-family: var(--font-primary);
-    font-weight: 600;
-    padding: 10px 15px;
-    border-radius: 8px; /* Slightly more rounded */
-    background-color: var(--color-accent);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
+/* INPUTS */
 input {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
-    color: var(--color-text-primary);
-    font-size: 16px;
+  width: 100%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 16px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-
+/* BUTTON (clean, single definition) */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  font-family: var(--font-primary);
+  font-weight: 600;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  background-color: #007aff; /* Apple Blue for action buttons */
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background-color: #007aff;
   color: white;
-  transition: background-color 0.25s, transform 0.1s;  
+
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.1s;
 }
 
 button:hover {
   background-color: #005bb5;
-  border-color: #007aff;
-  transform: translateY(-1px); /* Subtle lift on hover */
+  transform: translateY(-1px);
 }
 
-/* --- MOBILE RESPONSIVENESS: Adjust styles for screens up to 600px wide (most phones) --- */
+/* MOBILE RESPONSIVE */
 @media (max-width: 600px) {
-    
-    /* General App Container Adjustments */
-    .App {
-        margin: 20px auto; /* Reduce vertical margin on mobile */
-        padding: 0 10px; /* Reduce side padding */
-    }
+  .App {
+    margin: 20px auto;
+    padding: 0 10px;
+  }
 
-    /* Collapse the 2-column stats grid to 1 column */
-    .glass-panel > div:nth-child(2) { 
-        /* Target the div containing the stats paragraphs inside the dashboard cards */
-        grid-template-columns: 1fr; /* Change to a single column */
-        gap: 8px; /* Reduce gap */
-    }
+  .glass-panel > div:nth-child(2) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 
-    /* Ensure inputs take full width when columns collapse */
-    .glass-panel input {
-        width: 100%;
-        box-sizing: border-box; /* Include padding/border in width calculation */
-    }
-    
-    /* Adjust input/button layout in the Staking Dashboard */
-    .glass-panel > div:nth-child(3) { 
-        /* Target the input/button container */
-        flex-direction: column; /* Stack input and button vertically */
-        align-items: stretch; /* Stretch items to full width */
-    }
-    
-    /* Ensure h1 is not too large on small screens */
-    h1 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
+  .glass-panel > div:nth-child(3) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 }
