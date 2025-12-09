@@ -44,17 +44,39 @@ function StakingDashboard({ provider, signer, userAddress, lastUpdated, setLastU
 
             const [
                 totalStakedRaw, 
-                pendingTaxRaw, 
-                lockEndTime
+                rewardDebtRaw, 
+                lockEndTime,
+                accRewardPerShareRaw
             ] = await Promise.all([
-                contract.stakedTokens(userAddress),
-                contract.pendingTaxReward(userAddress), // <<< ASSUMED VIEW FUNCTION
-                contract.lockEndTime(userAddress) 
+                contract.userLockedTokens(userAddress), // <-- MUST CALL userLockedTokens
+                contract.userRewardDebt(userAddress),   // <-- MUST CALL userRewardDebt
+                contract.lockEndTime(userAddress),
+                contract.accRewardPerShare()
             ]);
+
+            // --- REWARD CALCULATION ---
+            
+            const stakedAmountBN = totalStakedRaw;
+            const rewardDebtBN = rewardDebtRaw;
+            const accRewardPerShareBN = accRewardPerShareRaw;
+            
+            // Assuming a common scaling factor of 1e12 for the accumulator. 
+            // NOTE: This SCALING_FACTOR MUST match how your Solidity contract scaled accRewardPerShare.
+            const SCALING_FACTOR = 10n ** 12n; 
+            
+            // Total accrued = (Staked * Accumulator) / Scale
+            const totalAccrued = (stakedAmountBN * accRewardPerShareBN) / SCALING_FACTOR;
+            
+            // Pending Reward = Total Accrued - Reward Debt Checkpoint
+            const pendingReward = totalAccrued - rewardDebtBN;
+    
+            const finalPendingReward = (pendingReward < 0n) ? 0n : pendingReward;
+            
+            // --- END REWARD CALCULATION ---
             
             setStats({
-                totalStaked: formatBigInt(totalStakedRaw),
-                pendingTax: formatBigInt(pendingTaxRaw),
+                totalStaked: formatBigInt(stakedAmountBN),
+                pendingTax: formatBigInt(finalPendingReward),
                 lockStatus: formatLockTime(lockEndTime),
             });
 
