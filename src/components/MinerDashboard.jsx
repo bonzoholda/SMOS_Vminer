@@ -23,20 +23,6 @@ function MinerDashboard({ provider, signer, userAddress, lastUpdated, setLastUpd
     // State to force data refresh after a deposit or claim
     //const [lastUpdated, setLastUpdated] = useState(Date.now());
 
-    // Helper to format Unix timestamp to readable date/time
-    const formatLockTime = (timestamp) => {
-        if (timestamp === 0n) return 'Not Locked';
-        const now = Date.now() / 1000;
-        const diff = Number(timestamp) - now;
-        
-        if (diff <= 0) return 'Unlocked';
-        
-        // Simple display: remaining days/hours
-        const days = Math.floor(diff / (60 * 60 * 24));
-        const hours = Math.floor((diff % (60 * 60 * 24)) / (60 * 60));
-        
-        return `Locked: ${days}d ${hours}h`;
-    };
 
     const fetchStats = async () => {
         if (!provider || !userAddress) return;
@@ -47,20 +33,17 @@ function MinerDashboard({ provider, signer, userAddress, lastUpdated, setLastUpd
 
             const [
                 userShares, 
-                pendingRewards, 
-                lockEndTime,
+                pendingRewards,                 
                 smosBal
             ] = await Promise.all([
                 contract.userShares(userAddress),
-                contract.pendingReward(userAddress),
-                contract.lockEndTime(userAddress),
+                contract.pendingReward(userAddress),                
                 contract.balanceOf(userAddress) // ERC20 balance
             ]);
             
             setStats({
                 shares: formatBigInt(userShares),
-                rewards: formatBigInt(pendingRewards),
-                lockTime: formatLockTime(lockEndTime),
+                rewards: formatBigInt(pendingRewards),                
                 smosBalance: formatBigInt(smosBal),
             });
 
@@ -108,7 +91,7 @@ function MinerDashboard({ provider, signer, userAddress, lastUpdated, setLastUpd
                 <p><strong>SMOS Balance:</strong> {stats.smosBalance} SMOS</p>
                 <p><strong>Staking Shares:</strong> {stats.shares} Shares</p>
                 <p><strong>Pending Reward:</strong> {stats.rewards} SMOS</p>
-                <p><strong>Lock Status:</strong> {stats.lockTime}</p>
+                
             </div>
             <div style={{ display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center' }}>
                 <button onClick={() => setLastUpdated(Date.now())}>
