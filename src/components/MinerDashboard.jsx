@@ -86,7 +86,7 @@ function MinerDashboard({ provider, signer, userAddress, lastUpdated, setLastUpd
     
     return (
         <div className="glass-panel" style={{ marginTop: '30px' }}>
-            <h3>Miner Dashboard Stats</h3>
+            <h3>Pulse Generator Dashboard Stats</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', textAlign: 'left' }}>
                 <p><strong>SMOS Balance:</strong> {stats.smosBalance} SMOS</p>
                 <p><strong>Pulse Rates:</strong> {stats.shares} Beats</p>
