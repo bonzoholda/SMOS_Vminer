@@ -89,7 +89,7 @@ function MinerDashboard({ provider, signer, userAddress, lastUpdated, setLastUpd
             <h3>Miner Dashboard Stats</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', textAlign: 'left' }}>
                 <p><strong>SMOS Balance:</strong> {stats.smosBalance} SMOS</p>
-                <p><strong>Staking Shares:</strong> {stats.shares} Shares</p>
+                <p><strong>Pulse Rates:</strong> {stats.shares} Beats</p>
                 <p><strong>Pending Reward:</strong> {stats.rewards} SMOS</p>
                 
             </div>
