@@ -24,6 +24,17 @@
   font-family: var(--font-primary) !important;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
 body {
   margin: 0;
   min-width: 320px;
@@ -45,10 +56,13 @@ body {
 
 /* APP CONTAINER */
 .App {
+  width: 100%;
   max-width: 600px;
-  margin: 50px auto;
-  padding: 0 15px;
+  margin: 30px auto;
+  padding: 0 12px;
+  overflow-x: hidden;
 }
+
 
 /* GLASS PANEL */
 .glass-panel {
@@ -60,7 +74,17 @@ body {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
+
+/* Any grid inside becomes single column automatically */
+.glass-panel div {
+  width: 100%;
+  max-width: 100%;
+}
+
 
 /* TYPOGRAPHY */
 h1 {
@@ -125,25 +149,48 @@ button:hover {
   transform: translateY(-1px);
 }
 
-/* MOBILE RESPONSIVE */
 @media (max-width: 600px) {
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
   .App {
-    margin: 20px auto;
+    margin: 15px auto;
     padding: 0 10px;
-  }
-
-  .glass-panel > div:nth-child(2) {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .glass-panel > div:nth-child(3) {
-    flex-direction: column;
-    align-items: stretch;
   }
 
   h1 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+  }
+
+  /* Fix ANY grid used inside dashboard */
+  .glass-panel [class*="grid"],
+  .glass-panel div {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Inputs take full width */
+  .glass-panel input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Button full width on mobile */
+  .glass-panel button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Force flex layouts to stack vertically */
+  .glass-panel .row,
+  .glass-panel .flex,
+  .glass-panel > div:nth-child(3) {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px;
   }
 }
