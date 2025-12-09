@@ -13,7 +13,8 @@ function App() {
 
     return (
         <div className="App" style={{ maxWidth: '600px', margin: '50px auto', fontFamily: 'Arial' }}>
-            <h1>Hybrid Pulse Miner Staking Interface</h1>
+            <h1>SPHYGMOS</h1>
+            <h2>Hybrid Pulse-Miner Staking Interface</h2>
             
             <ConnectWallet
                 setProvider={setProvider}
