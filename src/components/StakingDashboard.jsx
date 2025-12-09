@@ -155,7 +155,7 @@ function StakingDashboard({ provider, signer, userAddress, lastUpdated, setLastU
 
     return (
         <div className="glass-panel" style={{ marginTop: '20px' }}>
-            <h3>Staking Dashboard (Tax Dividends)</h3>
+            <h3>SMOS Token Staking</h3>
             
             {/* Input and STAKE Button */}
             <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
@@ -175,9 +175,9 @@ function StakingDashboard({ provider, signer, userAddress, lastUpdated, setLastU
             {/* Stats Display */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', textAlign: 'left', borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '15px' }}>
                 <p><strong>Total Staked:</strong> {stats.totalStaked} SMOS</p>
-                <p><strong>Pending Tax Rewards:</strong> {stats.pendingTax} SMOS</p>
+                <p><strong>Pending Dividend Rewards:</strong> {stats.pendingTax} SMOS</p>
                 <p style={{ gridColumn: 'span 2' }}>
-                    <strong>Lock Status:</strong> <span style={{ color: stats.lockStatus.locked ? 'red' : 'lightgreen', fontWeight: 'bold' }}>{stats.lockStatus.status}</span>
+                    <strong>Token Lock Status:</strong> <span style={{ color: stats.lockStatus.locked ? 'red' : 'lightgreen', fontWeight: 'bold' }}>{stats.lockStatus.status}</span>
                 </p>
             </div>
             
