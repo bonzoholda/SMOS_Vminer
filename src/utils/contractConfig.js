@@ -1,8 +1,8 @@
 // SMOS Contract (HybridPulseMiner) Details
-export const SMOS_CONTRACT_ADDRESS = '0xFb2D040864e45a9BAbf08676FFD699f5c0482E36';
+export const SMOS_CONTRACT_ADDRESS = '0xe60b0803696aea933f1B2d4feEb1C37d596980b0';
 
 // Mock USDT Contract Details
-export const USDT_CONTRACT_ADDRESS = '0xe60b0803696aea933f1B2d4feEb1C37d596980b0'; // <<< REPLACE THIS
+export const USDT_CONTRACT_ADDRESS = '0xd5210074786CfBE75b66FEC5D72Ae79020514afD'; // <<< REPLACE THIS
 
 // --- ABI Placeholders (REPLACE THESE WITH YOUR ACTUAL JSON ARRAYS) ---
 // Get this ABI from your compiled HybridPulseMiner contract in Remix
