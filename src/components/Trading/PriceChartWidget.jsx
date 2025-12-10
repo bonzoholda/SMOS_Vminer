@@ -1,7 +1,7 @@
 import React from 'react';
 
 // NOTE: You MUST replace this with the actual LP address on BSC Testnet once created
-const LP_ADDRESS = '0xc6CBFc2832DD787cea714DE5e6EF64799939BA2d'; // PLACEHOLDER: Find your SMOS/USDT LP address on BSC Testnet
+const LP_ADDRESS = '0x8Cc7CA331169416f4F71Ca80579F7eAcb3Dc438a'; // PLACEHOLDER: Find your SMOS/USDT LP address on BSC Testnet
 
 const CHART_WIDGET_URL = 
   `https://www.dextools.io/widget-chart/en/bnb/pair-explorer/${LP_ADDRESS}` +
