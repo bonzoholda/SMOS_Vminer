@@ -3,6 +3,7 @@ import ConnectWallet from './components/ConnectWallet';
 import DepositForm from './components/DepositForm';
 import MinerDashboard from './components/MinerDashboard';
 import StakingDashboard from './components/StakingDashboard';
+import TradingPanel from './components/Trading/TradingPanel';
 import './index.css'; // Assuming you have App.css for basic styling
 
 function App() {
