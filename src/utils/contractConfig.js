@@ -1,5 +1,5 @@
 // SMOS Contract (HybridPulseMiner) Details
-export const SMOS_CONTRACT_ADDRESS = '0x1cBBd8f2e0fDedd95607D385562Fe58299b8E901';
+export const SMOS_CONTRACT_ADDRESS = '0x75a683b1bb0bCfC3A0Da4b67f1D1Eb6D82A4Ad6c';
 
 // Mock USDT Contract Details
 export const USDT_CONTRACT_ADDRESS = '0xd5210074786CfBE75b66FEC5D72Ae79020514afD'; // <<< REPLACE THIS
