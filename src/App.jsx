@@ -45,6 +45,9 @@ function App() {
                         setLastUpdated={setLastUpdated} 
                         lastUpdated={lastUpdated} 
                     />
+
+                    {/* Integrate the new Trading Panel */}
+                    <TradingPanel />
                     
                 </>    
             )}
