@@ -1,7 +1,7 @@
 import React from 'react';
 
 const USDT_ADDRESS = "0xd5210074786CfBE75b66FEC5D72Ae79020514afD";
-const SMOS_ADDRESS = "0x0A346417da3ab10500e4a8CB091B4F0A05919AE7";
+const SMOS_ADDRESS = "0xd9F4135A3150d0639d18116F972BBF4A8AB024Ee";
 
 const PANCAKESWAP_URL = 
   `https://pancakeswap.finance/swap?chain=bsc-testnet` +
